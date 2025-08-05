@@ -16,7 +16,7 @@ User Login: Secure login for donors, recipients, and admins with JWT-based authe
 
 
 
-Admin Dashboard: Admins can view a list of all users (with name, email, role, blood group, DOB, location, mobile) and delete users.
+Admin Dashboard: Admins can view a list of all users (with name, email, role) and delete users.
 
 
 
