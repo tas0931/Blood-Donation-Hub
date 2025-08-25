@@ -1,7 +1,7 @@
 
 
 **Blood Donation Hub:**
-**ONLY 4 FEATURES HAVE BEEN IMPLEMENTED NEW FEATURES IS COMING SOON**
+
 
 Blood Donation Hub is a web application built with the MERN stack (MongoDB, Express.js, React, Node.js) to facilitate blood donation management. It allows users to register as donors or recipients, log in to access role-based dashboards, and enables admins to manage users (view and delete) via an admin dashboard. The application promotes blood donation with a user-friendly interface and robust backend.
 
