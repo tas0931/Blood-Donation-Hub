@@ -15,7 +15,9 @@ app.use(express.json());
 
 // Routes
 const userRoutes = require("./routes/userRoutes");
+const campRoutes = require("./routes/campRoutes");
 app.use("/api/users", userRoutes);
+app.use("/api/camps", campRoutes);
 
 // Root test route
 app.get("/", (req, res) => {

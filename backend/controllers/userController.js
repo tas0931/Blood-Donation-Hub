@@ -98,7 +98,22 @@ exports.adminLogin = async (req, res) => {
 // Get all users (admin only)
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password");
+    // Check if bloodGroup query parameter is provided
+    const { bloodGroup } = req.query;
+    
+    let query = {};
+    
+    // If bloodGroup is provided, add it to the query
+    if (bloodGroup) {
+      // Validate blood group
+      const validBloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+      if (!validBloodGroups.includes(bloodGroup)) {
+        return res.status(400).json({ error: "Invalid blood group" });
+      }
+      query.bloodGroup = bloodGroup;
+    }
+    
+    const users = await User.find(query).select("-password");
     res.status(200).json(users);
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch users" });
@@ -114,5 +129,87 @@ exports.deleteUser = async (req, res) => {
     res.status(200).json({ message: "User deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: "Error deleting user" });
+  }
+};
+
+// Get user profile (protected route)
+exports.getUserProfile = async (req, res) => {
+  try {
+    // req.user is set by the protect middleware
+    const user = req.user;
+    res.status(200).json({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      bloodGroup: user.bloodGroup,
+      role: user.role
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch user profile" });
+  }
+};
+
+// Search recipients by blood group (for donors)
+exports.searchRecipientsByBloodGroup = async (req, res) => {
+  try {
+    const { bloodGroup } = req.query;
+    
+    // Validate blood group
+    const validBloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+    if (!validBloodGroups.includes(bloodGroup)) {
+      return res.status(400).json({ error: "Invalid blood group" });
+    }
+    
+    // Find recipients with the specified blood group
+    const recipients = await User.find({
+      role: "recipient",
+      bloodGroup: bloodGroup
+    }).select("name email dob location mobile");
+    
+    res.status(200).json(recipients);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to search recipients" });
+  }
+};
+
+// Search donors by blood group (for recipients)
+exports.searchDonorsByBloodGroup = async (req, res) => {
+  try {
+    const { bloodGroup } = req.query;
+    
+    // Validate blood group
+    const validBloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+    if (!validBloodGroups.includes(bloodGroup)) {
+      return res.status(400).json({ error: "Invalid blood group" });
+    }
+    
+    // Find donors with the specified blood group
+    const donors = await User.find({
+      role: "donor",
+      bloodGroup: bloodGroup
+    }).select("name email dob location mobile");
+    
+    res.status(200).json(donors);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to search donors" });
+  }
+};
+
+// Get user statistics (public)
+exports.getUserStats = async (req, res) => {
+  try {
+    const totalUsers = await User.countDocuments();
+    const donorCount = await User.countDocuments({ role: "donor" });
+    const recipientCount = await User.countDocuments({ role: "recipient" });
+    const adminCount = await User.countDocuments({ role: "admin" });
+    
+    res.status(200).json({
+      totalUsers,
+      donors: donorCount,
+      recipients: recipientCount,
+      admins: adminCount
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch user statistics" });
   }
 };

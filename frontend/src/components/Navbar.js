@@ -18,13 +18,14 @@ const Navbar = () => {
       <Toolbar>
         <Typography variant="h6">Blood Donation Hub</Typography>
         <Box sx={{ ml: "auto" }}>
-          <Button color="inherit" component={Link} to="/">Dashboard</Button>
+          <Button color="inherit" component={Link} to="/">Home</Button>
+          <Button color="inherit" component={Link} to="/blood-camps">Blood Camps</Button>
 
           {!user && (
             <>
               <Button color="inherit" component={Link} to="/register">Register</Button>
               <Button color="inherit" component={Link} to="/login">Login</Button>
-              <Button color="inherit" component={Link} to="/admin-login">Admin Login</Button> 
+              <Button color="inherit" component={Link} to="/admin-login">Admin Login</Button>
             </>
           )}
 

@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import DonorView from "./pages/DonorView";
 import RecipientView from "./pages/RecipientView";
+import BloodCamp from "./pages/BloodCamp";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import AdminLogin from './pages/AdminLogin';
@@ -19,6 +20,7 @@ function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/donor" element={<DonorView />} />
         <Route path="/recipient" element={<RecipientView />} />
+        <Route path="/blood-camps" element={<BloodCamp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin-login" element={<AdminLogin />} />
       </Routes>
