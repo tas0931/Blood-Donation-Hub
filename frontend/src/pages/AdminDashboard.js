@@ -40,7 +40,7 @@ const AdminDashboard = () => {
         params.append("bloodGroup", bloodType);
       }
       
-      const url = `http://localhost:5000/api/users${params.toString() ? `?${params.toString()}` : ""}`;
+      const url = `http://https://blood-donation-hub-backend.onrender.com/api/users${params.toString() ? `?${params.toString()}` : ""}`;
       const res = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -56,7 +56,7 @@ const AdminDashboard = () => {
 
   const fetchCamps = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/camps");
+      const res = await axios.get("http://https://blood-donation-hub-backend.onrender.com/api/camps");
       setCamps(res.data);
     } catch (err) {
       console.error("Error fetching camps:", err);
@@ -70,7 +70,7 @@ const AdminDashboard = () => {
       if (!token) {
         throw new Error("No authentication token found");
       }
-      await axios.delete(`http://localhost:5000/api/users/${id}`, {
+      await axios.delete(`http://https://blood-donation-hub-backend.onrender.com/api/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchUsers();
@@ -87,7 +87,7 @@ const AdminDashboard = () => {
       if (!token) {
         throw new Error("No authentication token found");
       }
-      await axios.delete(`http://localhost:5000/api/camps/${id}`, {
+      await axios.delete(`http://https://blood-donation-hub-backend.onrender.com/api/camps/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchCamps();
@@ -108,7 +108,7 @@ const AdminDashboard = () => {
       if (!token) {
         throw new Error("No authentication token found");
       }
-      await axios.post("http://localhost:5000/api/camps", campForm, {
+      await axios.post("http://https://blood-donation-hub-backend.onrender.com/api/camps", campForm, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCampForm({ name: "", date: "", place: "", description: "" });
