@@ -31,7 +31,7 @@ const RecipientView = () => {
     const fetchUserProfile = async () => {
       try {
         const token = getToken();
-        const res = await axios.get("http://localhost:5000/api/users/profile", {
+        const res = await axios.get("https://blood-donation-hub-backend.onrender.com/api/users/profile", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -62,7 +62,7 @@ const RecipientView = () => {
       }
       // Use URLSearchParams to properly encode the blood group parameter
       const params = new URLSearchParams({ bloodGroup: searchParams.bloodGroup });
-      const res = await axios.get(`http://localhost:5000/api/users/search-donors?${params.toString()}`, {
+      const res = await axios.get(`https://blood-donation-hub-backend.onrender.com/api/users/search-donors?${params.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
