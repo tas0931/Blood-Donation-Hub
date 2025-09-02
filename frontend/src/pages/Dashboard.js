@@ -23,7 +23,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await axios.get("http://https://blood-donation-hub-backend.onrender.com/api/users/stats");
+        const res = await axios.get("https://blood-donation-hub-backend.onrender.com/api/users/stats");
         setStats(res.data);
       } catch (err) {
         console.error("Failed to fetch statistics", err);
