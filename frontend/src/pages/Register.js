@@ -22,7 +22,7 @@ const Register = () => {
     e.preventDefault();
     console.log("Form Data:", form); // Debug log
     try {
-      await axios.post('http://localhost:5000/api/users/register', form);
+      await axios.post('https://blood-donation-hub-backend.onrender.com/api/users/register', form);
       alert("Registration successful");
     } catch (err) {
       alert(err.response?.data?.error || "Registration failed");
