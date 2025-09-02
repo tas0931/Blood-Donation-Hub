@@ -21,7 +21,7 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://https://blood-donation-hub-backend.onrender.com/api/users/login', form);
+      const res = await axios.post('https://blood-donation-hub-backend.onrender.com/api/users/login', form);
       const { token, user } = res.data;
 
       if (user.role !== "admin") {
