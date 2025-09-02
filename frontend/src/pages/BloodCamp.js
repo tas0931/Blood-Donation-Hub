@@ -32,7 +32,7 @@ const BloodCamp = () => {
         params.append("place", location);
       }
       
-      const url = `http://localhost:5000/api/camps${params.toString() ? `?${params.toString()}` : ""}`;
+      const url = `http://https://blood-donation-hub-backend.onrender.com/api/camps${params.toString() ? `?${params.toString()}` : ""}`;
       const res = await axios.get(url);
       setCamps(res.data);
       setError("");
